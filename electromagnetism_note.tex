@@ -1,0 +1,351 @@
+\documentclass[11pt]{ctexart}
+\usepackage{fancyhdr}
+
+% 清除页眉内容并去掉页眉横线
+\fancyhf{} % 清空所有页眉页脚
+\renewcommand{\headrulewidth}{0pt} % 去掉页眉横线
+\pagestyle{fancy} % 应用设置
+\usepackage{graphicx}
+\usepackage{fix-cm}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{esint}
+\linespread{1.5}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+\title{电磁学笔记}
+\author{CCY}
+\date{\today}
+\begin{document}
+\tableofcontents%生成目录
+\newpage%新建页，内容和目录分开
+\maketitle
+\section{基本的电磁现象}
+\subsection{电荷与电场}
+\subsection{导体与电介质}
+\subsection{电流场的描述}
+\subsection{磁场}
+\subsection{磁矩}
+\newpage
+\section{电场}
+\subsection{高斯定理}
+\subsection{电场的散度}
+\subsection{静电场的电势}
+\subsection{静电势能和电场中的能量}
+\subsubsection{电荷在外电场的静电势能}
+\subsubsection{带点体系的静电能}
+电势能存储在电场中:类比弹簧：势能储存在弹簧中，压缩弹簧，能量
+被存储到弹簧中；两个正电荷相互靠近，电场发生改变，电势能存储
+到电场中；      不同之处：弹簧的弹性势能与两端的质量块无关，
+电势能与电场强度有关
+
+静电势能<-->电势<-->做功<-->电场力：
+体系的电势能：$E=\frac{1}{2} \int \rho(\vec{r})\phi(\vec{r})dV$
+=$\frac{1}{2} \sum q_iU_i$=$\frac{1}{2} \iint \rho_e u \, d\tau $
+
+\noindent 例题：
+\begin{enumerate}
+    \item 均匀带电球壳带电量为Q,求它的电势能
+        
+    解：在空间中，将电荷不断从无穷远处移动到球壳上，使球壳的带电量从0增加至Q,在这个过程中，外力做的功即为体系的电势能：
+
+    运用公式求解：$U=\frac{1}{4 \pi \varepsilon_0} \frac{Q}{R}$
+    
+    $W=\frac{1}{2}Q U =\frac{1}{8 \pi \varepsilon_0} \frac{Q^2}{R}$
+
+    \item 均匀带电球体，半径为$R$，电荷密度为$\rho$，求它的电势能
+    
+    解：利用公式求解：
+
+    $\vec{E}=\begin{cases}
+        \frac{1}{4 \pi \varepsilon_0} \frac{Q}{r^2} & r<R \\
+        \frac{1}{4 \pi \varepsilon_0} \frac{Q}{R^3}  r & r>R
+    \end{cases}$
+   \vspace{10pt}
+   \begin{spacing}{2.0}
+
+    $U=\frac{1}{4 \pi \varepsilon_0} (\int_r^R \vec{E} dx+ \int_R ^\infty \vec{E} dx)
+    =\frac{1}{4 \pi \varepsilon_0 R^3} \int_r^R x dx+ \int_R ^\infty \frac{R^3}{x^2} dx
+    =\frac{Q}{4 \pi \varepsilon_0 R^3}(-\frac{x}{R^3} \mid_R^\infty + \frac{1}{2} x^2\mid_r^R)
+    =\frac{Q}{4 \pi \varepsilon_0 R ^3} \frac{3R^2-r^2}{2}$
+    
+    $ E_\phi =\frac{1}{2} \int \rho u d\tau$
+
+    $= \frac{1}{4} \frac{Q}{4 \pi \varepsilon_0 R^3} \frac{3Q}{4 \pi R^3} \int_{\Omega} (3R^2-r^2)dV$
+
+   \end{spacing}
+   \vspace{10pt}
+    $=\frac{3 Q^2}{20 \pi \varepsilon_0 R }$
+    
+
+\end{enumerate}
+\subsubsection{电场的能量}
+在某一带电球壳周围存在伴存电场，假设其等势面是一系列封闭曲面，空间被这些等势面划分成许多薄层，如图所示：
+
+将带点球壳每一部分从无穷远处移动到原处，在移动dx段距离的过程中，只有这一部分的电场发生了变化，故外力所做的功存储在这一部分空间中
+两等势面的电势差为$dU$,每一薄层的电能$dW=\frac{1}{2} QdU$,整个电场的能量$W=\frac{1}{2}Q \int dU=\frac{1}{2}QU_0$
+
+根据高斯定理有：$\oint \vec{E}dS=\frac{1}{\varepsilon_0} Q$
+
+设$dl$和$dS$的方向一致（即指向S的外法线方向）则有：$dU=\vec{E} dl$
+
+所以：$W=\oint \frac{1}{2}\varepsilon_0 \vec{E} \cdot \vec{E}d\tau$
+
+所以单位体积内的电场能量为：
+\begin{equation}
+w_e=\frac{1}{2} \varepsilon_0 E^2
+\end{equation}
+
+$w_e$叫做电场的能量密度,虽然是由孤立带点等势面的特例得到，却对所有电场都适用
+
+例题：
+
+\begin{itemize}
+\item 有一个厚度为t的球壳，内半径为R，将无穷远处的一个点电荷移动到导体空腔圆心处，求在移动过程中外力所做的功
+
+解：
+
+方法一：
+
+    从初态到末态，可以看作只有导体所占空间处的电场消失了，用电场的能量密度求解：
+
+$W=\frac{1}{2} \varepsilon_0 \int_R^{R+t}\vec{E}^2 d\tau 
+=\frac{Q^2}{32 \pi^2 \varepsilon_0} \int_R^{R+t}\frac{1}{r^4} d\tau 
+=\frac{Q^2}{8 \pi \varepsilon_0}(\frac{1}{R+t}-\frac{1}{R})$
+
+方法二：
+    求移动后体系的静电能
+
+\end{itemize}
+\subsubsection{电子的经典半径}
+带电粒子和他的电场是不可分割的整体，若电场的能量为W,按狭义相对论粒子的质量为
+\begin{equation}
+m_{em}=\frac{W}{c^2}
+\end{equation}
+其中，$m_{em}$是粒子的电磁质量，$W$是电子的电场能量，$c$是光速。
+$W$与电荷的分布有关，
+
+假设粒子半径为$r_0$，电荷密度为$\rho$，电荷量为$q$，
+
+电荷均匀分布在球面上：
+\begin{equation}
+    m_{em}=\frac{1}{2} \frac{Q^2}{4 \pi \varepsilon_0 c^2 R}
+\end{equation}
+
+电荷均匀分布在球体上：
+\begin{equation}
+    m_{em}=\frac{3}{5} \frac{Q^2}{4 \pi \varepsilon_0 c^2 R}
+\end{equation}
+
+迄今还无法测知电荷的分布，作为一种估计，$m_{em}=\frac{Q^2}{4 \pi \epsilon_0 c^2 R}
+$
+由上式可得：
+\begin{equation}
+    R=\frac{Q^2}{4 \pi \varepsilon_0 c^2 m_{em}}
+\end{equation}
+粒子的电量是可以测得的，但是$m_{em}$是未知的
+
+电子的电荷量$q=-1.6 \times 10^{-19} C$，质量$m_e=9.1 \times 10^{-31} kg$，
+若将其全部估算为电磁质量，则
+\begin{equation}
+    R=\frac{(1.6 \times 10^{-19})^2}{4 \pi \varepsilon_0 c^2 m_e} \approx 2.82 \times 10^{-13} m
+\end{equation}
+即电子的经典半径，是根据宏观电磁学对电子半径的估计，不可能是准确的。
+
+\subsection{导体的静电平衡和电子的发射}
+\subsubsection{导体中的自由电子}
+势阱： 在导体中，电荷分布是均匀的，电场强度为0，电势是常数，
+
+逸出功：
+
+\subsubsection{静电平衡}
+均匀导体板在匀强电场中的情况
+
+不规则导体在电场中的情况
+
+导体有空腔的情况：空腔内部电场为0
+
+初始外电场为0，导体有空腔，空腔内有电荷：
+
+同上，但导体接地：
+
+同上，在导体外部有电荷：
+
+\section{电流场}
+\subsection{导体中的传导电流}
+\subsubsection{欧姆定律}
+电流密度：在导体中任取一个小面积元$dS$,单位法向量为$\vec{n}$,电流密度为$\vec{j}$,
+\begin{equation}
+    dI=\vec{j} \cdot \vec{n} dS
+    =jdS \cos \theta
+\end{equation}
+单位面积的电流密度为$\vec{j}=nq\vec{v}$,其中，$n$为单位体积内的自由电子数，$q$为电子的电荷量，$\vec{v}$为电子的漂移速度
+
+真实速度：电子在导体中做无规则运动，常温下平均速率约为$10^5~10^6m/s$平均速度为0不形成电流
+
+漂移速度：由于电场的作用，电子有逆着电场方向的加速度和速度 可用$\vec{u}$表示，数量级约为$10^{-4}~~10^{-5}m/s$，正是漂移速度产生了宏观电流
+
+在导体中，电子受到电场力的作用，对电子使用冲量定理:
+\begin{equation}
+    \vec{v_0}=0;
+    m\vec{u_末}=-eE
+\end{equation}
+取一个
+\subsection{电源及其电动势}
+\subsection{电容}
+\subsection{电流场的连续性}
+
+
+
+\newpage
+
+\section{磁场与电磁效应}
+\subsection{磁场的通量和环量}
+\subsubsection{磁场的通量————磁场的高斯定理}
+在1.4.4中讲了毕奥-萨伐尔定律：
+在相对电流元矢径为$\vec{r}$的点P处，电流的伴存磁场为：
+\begin{equation}
+    dB=\frac{\mu_0}{4 \pi} \frac{I d\vec{l} \times \vec{r}}{r^3}
+\end{equation}
+
+对任意曲面S,磁感应强度矢量的磁通量：
+
+\begin{equation}
+    \phi_B=\oiint_S \vec{B} \cdot d\vec{S}
+\end{equation}
+
+由于磁感线是闭合曲线，所以对任意闭合曲面S，磁通量为零，即$\oiint_S d\vec{B} \cdot d\vec{S} =0$
+
+对闭合曲面，根据高斯定理：$ \oiint _S \vec{B} \cdot d\vec{S}=\iiint_V \nabla \cdot \vec{B} dV =0 $,
+因为S是任意的，所以必然有：
+\begin{equation}
+    \nabla \cdot \vec{B} =0
+\end{equation}
+
+说明磁场的散度为0.散度为0的场叫做无散场，电流场也是无散场。
+
+
+\subsubsection{磁场的环量安培环路定理}
+安培环路定理：磁感应强度沿任一有向闭合环路L的环量等于穿过该环路所围成的任意面S的电流代数和的$\mu_0$倍：
+
+\begin{equation}
+    \oint_L \vec{B} \cdot d\vec{r}=\mu_0 \Sigma_{i=1}^n I_i
+\end{equation}
+
+鉴于全电流的概念：
+\begin{equation}
+    \Sigma_{i=1}^n I_i=\iint_S \vec{j} \cdot d\vec{S}
+\end{equation}
+
+所以安培环路定理可以写成：
+\begin{equation}
+    \oint_L \vec{B} \cdot d\vec{r}=\mu_0 \iint_S \vec{j} \cdot d\vec{S}
+\end{equation}
+
+根据斯托克定律：
+\begin{equation}
+    \oint_L \vec{B} \cdot d\vec{r}=\iint_S (\nabla \times \vec{B}) \cdot d\vec{S}
+\end{equation}
+其中，$\nabla =(\partial_x,\partial_y,\partial_z)$,$\nabla \times \vec{B} $是磁场的旋度
+
+则，
+
+\begin{equation}
+    \iint_S \nabla \times \vec{B} \cdot d\vec{S}=\mu_0 \iint_S \vec{j} \cdot d|vec{S}
+\end{equation}
+
+所以，
+\begin{equation}
+    \nabla \times \vec{B}=\mu_0 \vec{j}
+\end{equation}
+这是安培环路定律的微分形式
+
+\subsubsection{面电流的磁场}
+面电流：若电流分布在厚度为$\varDelta d$的薄层中，且$\varDelta d$可视为无穷小量，则认为电流分布在一个面上，称为面电流
+
+设一个薄层厚度为$\varDelta d$,宽度为$\varDelta l$,电流为$\varDelta I$,因为$\varDelta d$是无穷小量，用$\frac{\Delta I}{\Delta d}$表示电流密度，称为面电流密度，记为$\vec{j_m}$,单位为$A/m$
+\begin{equation}
+    j_m=\frac{\Delta I}{\Delta d} 
+\end{equation}
+
+若通过薄层的电流密度矢量为$\vec{j}$,则有：
+\begin{equation}
+    \varDelta I=\vec{j} \varDelta L \varDelta d
+\end{equation}
+
+则：$\vec{j_m}=\vec{j} \varDelta d$
+
+在实际问题中，只有薄层的厚度$\varDelta d$可视为无穷小量时，才能用面电流的概念。若$j_m$不是无穷小量，则j必然为无穷大量，此时4.1.2最后的式子（微分形式的安培环路定理）将不再适用，但是积分形式的安培环路定理仍然适用。
+
+\subsubsection{柱电流面的磁场}
+
+有一截面均匀的无限长圆柱形电流面通有均匀稳定的横向面电流，电流面密度为$j_m$,由于磁感应强度与电流元垂直，所以$\vec{B}$只有z分量。又因为$\nabla \times \vec{B}=0$
+\subsection{通电螺线管的磁场}
+
+\subsection{电磁感应定律与涡旋电场}
+
+\subsection{几种电磁感应现象}
+
+\subsection{磁场的能量}
+
+\subsection{电路中的电磁感应}
+
+
+
+
+
+\section{电介质}
+
+\subsection{电介质的极化}
+根据电荷能否在物质中在宏观上（即离开电子原来所在的原子，在固体物理上叫做电子公有化）自由移动，将物质分为导体和绝缘体，绝缘体又称介质。但这种分类并不绝对，如半导体既是导体又是绝缘体；“击穿”现象：绝缘体变成了导体。
+
+电介质：能对外加电场做出相应的介质
+
+
+\subsubsection{介质极化的微观原理}
+在外加电场$\vec{E_0}$的作用下，介质中产生极化电荷$Q^\prime$,极化电荷产生电场$\vec{E^\prime}$，空间中的电场变为$\vec{E}=\vec{E_0}+\vec{E^\prime}$，这就是电介质极化的微观过程
+
+
+将每一个分子都看成一个电偶极子（在空间中产生电场；在外加电场的作用下会受力），$\vec{p}=q\cdot\vec{L}$.
+
+无极分子介质的位移极化：氢气($H_2$),二氧化碳($CO_2$)等，正负电荷中心重合，无极性。在外加电场的作用下，正负电荷中心发生位移，形成了电偶极子，p约为$10^{-29}-10^{-30}cm$量级
+
+有极分子的取向极化：例如氯化氢($HCl$)。正负电荷中心不重合，有电偶极矩。无外电场的情况下，由于热运动，分子的取向杂乱无章，所有分子的整体在宏观上无电偶极矩。外加电场之后，所有的电偶极矩受到力矩的作用，使电偶极子尽量往电场的方向分布，最终与热运动形成了一种平衡，宏观上有电偶极矩。且电偶极矩大小与温度有关。
+
+介质的极化主要是有极分子的取向极化。
+
+\subsubsection{极化强度矢量}
+\begin{equation}
+    \vec{P}=\frac{\Sigma \vec{p}_i}{dV}
+\end{equation}
+单位：$C/m^2$,是空间位置的函数，只存在于介质内部
+
+\subsubsection{极化电荷与极化强度矢量之间的关系}
+在外加电场的作用下，在空间中的介质中取一个闭合曲面，那么介质中的极化电荷与极化强度之间的关系是什么？
+
+在介质中的闭合曲面中，由于电荷极化时发生的位移非常小，可视为曲面内外部极化电荷为0，仅在闭合曲面表面的薄层中产生的极化电荷（电偶极子）对曲面包围体积中的极化电荷有贡献。取闭合曲面的一个面积微元$dS$,单位法向量为$\vec{n}$,取高为$l$，以$dS$为底面的一个小圆柱体，
+
+\begin{equation}
+    dV=l dS |\cos \theta|
+\end{equation}
+\begin{equation}
+    dN=n dV=n l|\cos\theta| dS
+\end{equation}
+\begin{equation}
+    dQ^\prime=q n l |\cos \theta| dS
+    =-\vec{P}\cdot d\vec{S}
+\end{equation}
+虽然介质的均匀极化非常困难，但在该微元中，可视为均匀极化，各电偶极矩相等。则由定义知：$\vec{P}=n q \vec{l}$,所以：
+\begin{equation}
+    Q^ \prime=-\oint_S \vec{P} \cdot d\vec{S}
+\end{equation}
+两边同时对体积求微分：
+\begin{equation}
+\rho^\prime (\vec{r})=-\nabla \cdot \vec{P}(\vec{r})
+\end{equation}
+
+
+
+
+
+\end{document}
